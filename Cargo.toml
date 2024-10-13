@@ -1,0 +1,16 @@
+[package]
+name = "api-v5"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix = "0.13.5"
+actix-web = "4.9.0"
+argon2 = "0.5.3"
+env_logger = "0.11.5"
+lazy_static = "1.5.0"
+log = "0.4.22"
+mongodb = "3.1.0"
+serde = { version = "1.0.210", features = ["derive"] }
+thiserror = "1.0.64"
+tokio = { version = "1.40.0", features = ["full"] }
