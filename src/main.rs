@@ -7,7 +7,6 @@ use std::io::{Error, ErrorKind};
 mod routes; 
 mod utils; 
 
-
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     env_logger::init();
