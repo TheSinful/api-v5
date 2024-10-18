@@ -351,6 +351,7 @@ dependencies = [
  "lazy_static",
  "log",
  "mongodb",
+ "rand",
  "serde",
  "serde_json",
  "thiserror",

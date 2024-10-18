@@ -1,6 +1,5 @@
 use argon2::{password_hash::{rand_core::OsRng, SaltString}, Argon2, PasswordHasher, PasswordVerifier};
 
-
 pub type HashedPassword = String;
 pub type UnhashedPassword = String;
 

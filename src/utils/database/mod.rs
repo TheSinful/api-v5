@@ -1,16 +1,20 @@
 use lazy_static::lazy_static;
-use mongodb::{bson::doc, options::{ClientOptions, ServerApi, ServerApiVersion}, Client};
-use std::sync::Mutex; 
+use mongodb::{
+    bson::doc,
+    options::{ClientOptions, ServerApi, ServerApiVersion},
+    Client,
+};
 use std::io;
+use std::sync::Mutex;
 
-pub mod user; 
+pub mod user;
 
 lazy_static! {
-    static ref MONGO_CLIENT: Mutex<Option<Client>> = Mutex::new(None);
+    pub static ref MONGO_CLIENT: Mutex<Option<Client>> = Mutex::new(None);
 }
 
 pub async fn connect_to_db() -> mongodb::error::Result<()> {
-    let url = "mongodb+srv://app:NUwhtTlxVxWkrXR6@xcel.djriw.mongodb.net/?retryWrites=true&w=majority&appName=Xcel"; 
+    let url = "mongodb+srv://app:NUwhtTlxVxWkrXR6@xcel.djriw.mongodb.net/?retryWrites=true&w=majority&appName=Xcel";
 
     let mut client_options = ClientOptions::parse(url).await?;
 
@@ -33,6 +37,9 @@ pub fn get_client() -> Result<Client, io::Error> {
     let mongo_client = MONGO_CLIENT.lock().unwrap();
     match &*mongo_client {
         Some(client) => Ok(client.clone()),
-        None => Err(io::Error::new(io::ErrorKind::NotFound, "MongoDB client is not initialized")),
+        None => Err(io::Error::new(
+            io::ErrorKind::NotFound,
+            "MongoDB client is not initialized",
+        )),
     }
 }

@@ -2,6 +2,7 @@ use crate::routes::services::auth::AuthError;
 use crate::routes::services::auth::Result;
 use crate::utils::database::get_client;
 use crate::utils::database::user::*;
+use crate::utils::password::UnhashedPassword;
 use actix_web::{get, web, HttpResponse, Responder};
 use serde::Deserialize;
 use serde::Serialize;
@@ -42,12 +43,12 @@ pub async fn login(body: web::Json<ReqBody>) -> impl Responder {
 #[allow(unused)]
 struct Login {
     username: String,
-    password: String, // unhashed
+    password: UnhashedPassword,
     user: Option<User>,
 }
 
 impl Login {
-    pub async fn new(username: String, password: String) -> Result<Login> {
+    pub async fn new(username: String, password: UnhashedPassword) -> Result<Login> {
         let client = get_client()?;
         let user = User::find(client, username.clone()).await?;
 

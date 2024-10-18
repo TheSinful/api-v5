@@ -1,9 +1,6 @@
 use crate::utils::database::user::Error as OperationError;
 use actix_web::{HttpResponse, ResponseError};
 
-#[cfg(test)]
-mod tests;
-
 pub mod login;
 pub mod register;
 
